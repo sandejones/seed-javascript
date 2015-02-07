@@ -25,37 +25,6 @@ function isPrime(num) {
     return true
 }
 
-function readTextFile(file)
-{
-  var txtFile = new XMLHttpRequest();
-  var lines = [];
-  var returnArray = new Array();
-
-  txtFile.open("GET", file, true);
-  txtFile.onreadystatechange = function()
-  {
-    if (txtFile.readyState === 4) {  // document is ready to parse.
-      if (txtFile.status === 200) {  // file is found
-        allText = txtFile.responseText; 
-        lines = txtFile.responseText.split("\n");      
-        returnArray = lines.slice(0);
-        return returnArray;
-      }
-    }
-  }
-  txtFile.send(null);
- 
-  }
-
-function readTextFile2(file)
-{
-    var lines = new Array;
-    $.get(file, function(data){
-            var array = data.split('\n');
-            console.log(lines);
-        });
- 
-  }
 
 
 function checkPalindrom(str) {
