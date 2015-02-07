@@ -25,18 +25,38 @@ function isPrime(num) {
     return true
 }
 
-
-
-
 function readTextFile(file)
 {
-  $.get(file, function(data) {
-   alert(data);
-   //process text file line by line
-   $('#div').html(data.replace('n','<br />'));
-  });
-  return data;
-}
+  var txtFile = new XMLHttpRequest();
+  var lines = [];
+  var returnArray = new Array();
+
+  txtFile.open("GET", file, true);
+  txtFile.onreadystatechange = function()
+  {
+    if (txtFile.readyState === 4) {  // document is ready to parse.
+      if (txtFile.status === 200) {  // file is found
+        allText = txtFile.responseText; 
+        lines = txtFile.responseText.split("\n");      
+        returnArray = lines.slice(0);
+        return returnArray;
+      }
+    }
+  }
+  txtFile.send(null);
+ 
+  }
+
+function readTextFile2(file)
+{
+    var lines = new Array;
+    $.get(file, function(data){
+            var array = data.split('\n');
+            console.log(lines);
+        });
+ 
+  }
+
 
 function checkPalindrom(str) {
     var len = str.length;
@@ -109,14 +129,34 @@ Application.prototype.getSumOfPrimes = function() {
   return sumOfPrimes;
 }
 
-Application.prototype.getLowerCase = function() {
+Application.prototype.getLowerCase = function(file) {
 
-	var fileText = "";
-  var readFile = ["/files/lowercasetest.txt"];
+  var txtFile = new XMLHttpRequest();
+  var lines = [];
+  var returnArray = new Array();
+
+  txtFile.open("GET", file, true);
+  txtFile.onreadystatechange = function()
+  {
+    if (txtFile.readyState === 4) {  // document is ready to parse.
+      if (txtFile.status === 200) {  // file is found
+        allText = txtFile.responseText; 
+        lines = txtFile.responseText.split("\n");      
+        returnArray = lines.slice(0);
+        for (var i = returnArray.length - 1; i >= 0; i--) {
+          outputString = returnArray[i];
+          outputString = outputString.toLowerCase();
+          console.log(outputString);
+        };
+
+      }
+    }
+  }
+  txtFile.send(null);
+
   
-  fileText = readTextFile(readFile[0]);
 
- 	return fileText;  
+ 	//return returnArray;  
 }
 
 
